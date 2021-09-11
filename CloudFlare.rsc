@@ -8,7 +8,8 @@
 :local CFapi "https://api.cloudflare.com/client/v4/zones/$CFzoneID/dns_records/$CFdnsID"
 
 :local resolvedIP [:resolve $CFdomain]
-:local ipaddr [/ip address get [/ip address find interface=$pppoe] network]
+:local ipaddr [/ip address get [/ip address find interface=$pppoe] address]
+:set ipaddr [:pick $ipaddr 0 ([len $ipaddr] -3)]
 
 :log info ("Local address:".$ipaddr)
 :log info ("Resolved address:".$resolvedIP)
